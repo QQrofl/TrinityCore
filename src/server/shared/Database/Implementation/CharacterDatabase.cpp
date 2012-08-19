@@ -549,4 +549,14 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PREPARE_STATEMENT(CHAR_INS_CHAR_TALENT, "INSERT INTO character_talent (guid, spell, spec) VALUES (?, ?, ?)", CONNECTION_ASYNC);
     PREPARE_STATEMENT(CHAR_DEL_CHAR_ACTION_EXCEPT_SPEC, "DELETE FROM character_action WHERE spec<>? AND guid = ?", CONNECTION_ASYNC);
     PREPARE_STATEMENT(CHAR_SEL_CHAR_PET_BY_ENTRY_AND_SLOT, "SELECT id, entry, owner, modelid, level, exp, Reactstate, slot, name, renamed, curhealth, curmana, curhappiness, abdata, savetime, CreatedBySpell, PetType FROM character_pet WHERE owner = ? AND slot = ?", CONNECTION_SYNCH);
+        /* Styler's */
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_SAVE, "INSERT INTO pvp_system (guid, name, score, rating) VALUES (?, ?, ?, ?)", CONNECTION_ASYNC);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_DUPLICATE, "SELECT name FROM pvp_system WHERE guid = ?", CONNECTION_BOTH);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_DELETE, "DELETE FROM pvp_system WHERE guid = ?", CONNECTION_ASYNC);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_LOAD, "SELECT guid, name, score, rating FROM pvp_system", CONNECTION_SYNCH);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_UPDATE_SCORE, "UPDATE pvp_system SET score = ? WHERE guid = ?", CONNECTION_ASYNC);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_RETRIEVE_SCORE, "SELECT score FROM pvp_system WHERE guid = ?", CONNECTION_BOTH);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_RETRIEVE_RATING, "SELECT rating FROM pvp_system WHERE guid = ?", CONNECTION_BOTH);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_UPDATE_RATING, "UPDATE pvp_system SET rating = ? WHERE guid = ?", CONNECTION_ASYNC);
+    PREPARE_STATEMENT(CHAR_PVPSYSTEM_SCOREBOARD, "SELECT name, rating FROM pvp_system ORDER BY rating DESC LIMIT 10", CONNECTION_BOTH);
 }
